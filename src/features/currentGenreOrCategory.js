@@ -11,10 +11,16 @@ export const genreOrCategory = createSlice({
     selectGenreOrCategory: (state, action) => {
       // eslint-disable-next-line no-param-reassign
       state.genreIdOrCategoryName = action.payload;
+      // eslint-disable-next-line no-param-reassign
+      state.searchQuery = '';
+    },
+    searchMovie: (state, action) => {
+      // eslint-disable-next-line no-param-reassign
+      state.searchQuery = action.payload;
     },
   },
 });
 
-export const { selectGenreOrCategory } = genreOrCategory.actions;
+export const { selectGenreOrCategory, searchMovie } = genreOrCategory.actions;
 
 export default genreOrCategory.reducer;
