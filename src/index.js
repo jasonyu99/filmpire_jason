@@ -5,7 +5,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Provider } from 'react-redux';
 
 import App from './components/App';
+// eslint-disable-next-line import/no-named-as-default
 import store from './app/store';
+import './index.css';
 
 const theme = createTheme({});
 
