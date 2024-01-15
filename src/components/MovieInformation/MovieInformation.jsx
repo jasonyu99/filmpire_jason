@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Typography, Button, ButtonGroup, Grid, Box, CircularProgress, useMediaQuery, Rating } from '@mui/material';
-import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBorderOurlined, Remove, ArrowBack } from '@mui/icons-material';
+import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBorderOutlined, Remove, ArrowBack } from '@mui/icons-material';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
@@ -15,6 +15,16 @@ const MovieInformation = () => {
   const { data, isFetching, error } = useGetMovieQuery(id);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+
+  const isMovieFavorited = true;
+  const isMovieWatchlisted = true;
+
+  const addToFavorites = () => {
+  };
+
+  const addToWatchlist = () => {
+  };
 
   if (isFetching) {
     return (
@@ -121,6 +131,70 @@ const MovieInformation = () => {
                 ),
               )
               .slice(0, 6)}
+        </Grid>
+
+        <Grid item container style={{ marginTop: '2rem' }}>
+          <div className={classes.buttonsContainer}>
+            <Grid item xs={12} sm={6} className={classes.buttonsContainer}>
+              <ButtonGroup size="small" variant="outlined">
+                <Button
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={data?.homepage}
+                  endIcon={<Language />}
+                >
+                  Website
+                </Button>
+                <Button
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`https://www.imdb.com/title/${data?.imdb_id}`}
+                  endIcon={<MovieIcon />}
+                >
+                  IMDB
+                </Button>
+                <Button
+                  onClick={() => setOpen(true)}
+                  href="#"
+                  endIcon={<Theaters />}
+                >
+                  Trailer
+                </Button>
+              </ButtonGroup>
+            </Grid>
+            <Grid item xs={12} sm={6} className={classes.buttonsContainer}>
+              <ButtonGroup size="medium" variant="outlined">
+                <Button
+                  onClick={addToFavorites}
+                  endIcon={
+                    isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite />
+                  }
+                >
+                  {isMovieFavorited ? 'Unfavorite' : 'Favorite'}
+                </Button>
+                <Button
+                  onClick={addToWatchlist}
+                  endIcon={isMovieWatchlisted ? <Remove /> : <PlusOne />}
+                >
+                  Watchlist
+                </Button>
+                <Button
+                  endIcon={<ArrowBack />}
+                  sx={{ borderColor: 'primary.main' }}
+                >
+                  <Typography
+                    style={{ textDecoration: 'none' }}
+                    component={Link}
+                    to="/"
+                    color="inherit"
+                    variant="subtitle2"
+                  >
+                    Back
+                  </Typography>
+                </Button>
+              </ButtonGroup>
+            </Grid>
+          </div>
         </Grid>
       </Grid>
     </Grid>
