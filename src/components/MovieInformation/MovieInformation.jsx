@@ -21,7 +21,6 @@ const MovieInformation = () => {
   const { data, isFetching, error } = useGetMovieQuery(id);
   const { data: recommendations, isFetching: isRecommendationsFetching } = useGetRecommendationsQuery({ movie_id: id, list: '/recommendations' });
 
-  console.log({ recommendations });
   const isMovieFavorited = true;
   const isMovieWatchlisted = true;
 
@@ -123,14 +122,14 @@ const MovieInformation = () => {
                 >
                   <img
                     className={classes.castImage}
-                    src={`https://image.tmdb.org/t/p/w500/${character.profile_path}`}
-                    alt={character.name}
+                    src={`https://image.tmdb.org/t/p/w500/${character?.profile_path}`}
+                    alt={character?.name}
                   />
                   <Typography color="textPrimary">
                     {character?.name}
                   </Typography>
                   <Typography color="textSecondary">
-                    {character.character.split('/')[0]}
+                    {character?.character.split('/')[0]}
                   </Typography>
                 </Grid>
                 ),
