@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Divider, List, ListItemButton, ListItemText, ListSubheader, ListItemIcon, Box, CircularProgress, Typography } from '@mui/material';
+import { Divider, List, ListItemButton, ListItemText, ListSubheader, ListItemIcon, Box, CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/styles';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,6 +27,10 @@ const Sidebar = ({ setMobileOpen }) => {
   const classes = useStyles();
   const { data, error, isFetching } = useGetGenresQuery();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [genreIdOrCategoryName]);
 
   if (error) return 'An error has occurred.';
 
